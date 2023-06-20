@@ -63,16 +63,38 @@ export const LoginStyled = styled.div`
                 border-radius: 6px;
             }
 
-            button {
+            .optionLogin {
 
-                padding: 1rem;
-                margin-top: 1.6rem;
+    
+                margin-top: 1.2rem;
+                height: 135px;
+                display: flex;
+                flex-direction: column;
+
+                gap: 0.5rem 0;
+            }
+
+            .registerBtn {
+
+                padding: 0.8rem;
+                font-size: 1rem;
+                font-weight: 400;
                 border-radius: 6px;
-
                 color: var(--color-grey-0);
-
                 background-color: var(--color-grey-1);
                 
+                display: flex;
+                justify-content: center;
+                text-decoration: none;
+                
+            }
+
+            .loginBtn{
+
+                padding: 1rem;
+                border-radius: 6px;
+                color: var(--color-grey-0);
+                background-color: var(--color-focus);
             }
 
             button:disabled {
@@ -81,20 +103,14 @@ export const LoginStyled = styled.div`
                 cursor: wait;
             }
 
-            button:hover{
+
+
+            .registerBtn:hover{
 
                 background-color: var(--color-focus);
             }
 
-            .registerBtn {
-
-
-                button {
-
-                    max-width: 368px;
-                    width: 100%;
-                }
-            }
+          
 
             span {
 
@@ -105,14 +121,12 @@ export const LoginStyled = styled.div`
                 display: flex;
                 justify-content: center;
 
-                margin-top: 2rem;
+            }
+
+            .error {
+                color: var(--color-negative);
             }
         }
-    }
-
-    @media (max-width: 480px) {
-
-       
     }
 
 `

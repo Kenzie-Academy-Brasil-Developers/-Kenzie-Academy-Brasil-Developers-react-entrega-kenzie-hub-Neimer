@@ -1,18 +1,24 @@
 import { Input } from "../../components/Input"
 import { LoginStyled } from "../../styles/login"
 import { useForm } from "react-hook-form"
+import { formSchema } from "../../components/Form/FormSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { api } from "../../api/api"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import { useState } from "react"
+import { UserContext } from "../../provider/userContext"
+import { useContext } from "react"
 
-export const Login = ({setAccountInfo}) => {
+export const Login = () => {
 
     const [loading, setLoading] = useState(false)
     
-    const {register, handleSubmit, reset} = useForm()
+    const {register, handleSubmit, reset, formState: { errors }} = useForm({
+        resolver: zodResolver(formSchema)
+    })
 
-    const navigate = useNavigate()
+    const { setAccountInfo, navigate} = useContext(UserContext)
 
     const handleForm = async  (accountData) => {
         
@@ -30,7 +36,6 @@ export const Login = ({setAccountInfo}) => {
             localStorage.setItem("@USERID", data.user.id)
             
             setAccountInfo(data)
-            // notify("Login Realizado com sucesso")
             
             toast.success('Login Realizado com Sucesso')
 
@@ -56,12 +61,18 @@ export const Login = ({setAccountInfo}) => {
                 <form onSubmit={handleSubmit(handleForm)}>
                     <h3>Login</h3>
                     <Input type="text" label="Email" {...register("email")}/>
+                    {errors.email ? <span className="error">{errors.email.message}</span> : null}
                     <Input type="password" label="Password" {...register("password")}/>
-                    <button disabled={loading}>{loading ? "Carregando..." : "Entrar"}</button>
-                    <span>Ainda não possui uma conta? </span>
-                    <Link className="registerBtn" to={"/register"}><button>Cadastre-se</button></Link>
+                    {errors.password ? <span className="error">{errors.password.message}</span> : null}
+                    <div className="optionLogin">
+                        <button className="loginBtn" disabled={loading}>{loading ? "Carregando..." : "Entrar"}</button>
+                        <span>Ainda não possui uma conta? </span>
+                        <Link className="registerBtn" to={"/register"}>Cadastre-se</Link>
+                    </div>
                 </form>
             </div>
         </LoginStyled>
     )
 }
+
+// Perguntar sobre validacao do zod no login

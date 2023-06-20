@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom"
 import { Login } from "../pages/Login"
-import { Register } from "../pages/register"
+import { Register } from "../pages/Register"
 import { Dashboard } from "../pages/Dashboard"
 
-export const RoutesMain = ({accountInfo, setAccountInfo}) => {
+export const RoutesMain = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<Login setAccountInfo={setAccountInfo}/>}/>
-            <Route path="/register" element={<Register/>}/>
-            <Route path="/dashboard" element={<Dashboard setAccountInfo={setAccountInfo} accountInfo={accountInfo}/>}/>
+            <Route path="/" element={<Login />}/>
+            <Route path="/register" element={<Register />}/>
+            <Route path="/dashboard" element={<Dashboard />}/>
         </Routes>
 
     )

@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom"
 import { StyledHeader, StyledMain } from "../../styles/dashboard"
 import { toast } from "react-toastify"
+import { UserContext } from "../../provider/userContext"
+import { useContext } from "react"
 
-export const Dashboard = ({accountInfo, setAccountInfo}) => {
+export const Dashboard = () => {
 
     const navigate = useNavigate()
 
+    const { accountInfo ,setAccountInfo } = useContext(UserContext)
+
     const logoutButton = () => {
-        // notify("Deslogado com sucesso")
         
         toast.warning("Deslogado com sucesso")
 

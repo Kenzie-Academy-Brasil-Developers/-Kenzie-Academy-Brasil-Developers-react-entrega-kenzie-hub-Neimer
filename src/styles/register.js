@@ -21,6 +21,7 @@ export const Registertyled = styled.div`
         align-items: center;
         width: 100%;
         height: 50px;
+        margin-bottom: 0.7rem;
 
         h1 {
 
@@ -28,13 +29,21 @@ export const Registertyled = styled.div`
             font-size: 24px;
         }
 
-        button {
+        .backBtn {
 
             background-color: var(--color-grey-2);
             color: var(--color-grey-0);
             border-radius: 8px;
             border: none;
-            padding: 0.7rem;
+            max-width: 70px;
+            width: 100%;
+            padding: 0.6rem;
+
+            text-decoration: none;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 
@@ -121,7 +130,6 @@ export const Registertyled = styled.div`
 
             background-color: var(--color-focus);
         }
-
 
 
     }

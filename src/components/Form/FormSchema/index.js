@@ -10,7 +10,8 @@ export const formSchema = z.object({
         .min(8, "A senha precisa conter pelo menos 8 caracteres")
         .regex(/(?=.*?[A-Z])/, "A senha precisa conter uma letra maiúscula")
         .regex(/(?=.*?[a-z])/, "A senha precisa conter uma letra minúscula")
-        .regex(/(?=.*?[0-9])/, "A senha precisa conter um número"),
+        .regex(/(?=.*?[0-9])/, "A senha precisa conter um número")
+        .regex(/(?=.*[$*&!@#])/, "A senha precisa contar um caractere especial "),
     
     confirmPassword: z.string()
     .min(1, "Confirmar senha é obrigatório"),

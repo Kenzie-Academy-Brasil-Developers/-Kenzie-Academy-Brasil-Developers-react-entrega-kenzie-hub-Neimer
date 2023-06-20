@@ -3,8 +3,9 @@ import { Input } from "../../components/Input"
 import { formSchema } from "../../components/Form/FormSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Registertyled } from "../../styles/register"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { api } from "../../api/api"
+import { toast } from "react-toastify"
 
 export const Register = () => {
 
@@ -12,10 +13,15 @@ export const Register = () => {
         resolver: zodResolver(formSchema)
     })
 
+    const navigate = useNavigate()
+
     const registerAccount = async (accountData) => {
         try {
             const {data} = await api.post("/users", accountData)
-            console.log(data)
+            toast.success("Conta criada com sucesso")
+            
+            navigate("/")
+
         } catch (error) {
             toast.error(error.message)
         }
@@ -33,9 +39,7 @@ export const Register = () => {
         <Registertyled>
             <div className="registerHeader">
                 <h1>Kenzie Hub</h1>
-                <Link to="/">
-                    <button>Voltar</button>
-                </Link>
+                <Link className="backBtn" to="/">Voltar</Link>
             </div>
             <form onSubmit={handleSubmit(handleCreateAccount)}>
                 <h3>Crie sua conta</h3>
