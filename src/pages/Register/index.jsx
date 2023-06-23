@@ -4,8 +4,8 @@ import { formSchema } from "../../components/Form/FormSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Registertyled } from "../../styles/register"
 import { Link, useNavigate } from "react-router-dom"
-import { api } from "../../api/api"
-import { toast } from "react-toastify"
+import { useContext } from "react"
+import { UserContext } from "../../provider/userContext"
 
 export const Register = () => {
 
@@ -13,24 +13,11 @@ export const Register = () => {
         resolver: zodResolver(formSchema)
     })
 
-    const navigate = useNavigate()
-
-    const registerAccount = async (accountData) => {
-        try {
-            const {data} = await api.post("/users", accountData)
-            toast.success("Conta criada com sucesso")
-            
-            navigate("/")
-
-        } catch (error) {
-            toast.error(error.message)
-        }
-    }
-
+    const {registerAccount} = useContext(UserContext)
 
     const handleCreateAccount = async (accountData) => {
 
-        await registerAccount  (accountData)
+        await registerAccount (accountData)
         reset()
     }
 

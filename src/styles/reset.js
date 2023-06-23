@@ -18,7 +18,7 @@ export const ResetStyle = createGlobalStyle`
 
     input {
 
-        border: 0;
+        border: none;
         outline: 0;
     }
 

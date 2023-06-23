@@ -1,7 +1,7 @@
 import { Input } from "../../components/Input"
 import { LoginStyled } from "../../styles/login"
 import { useForm } from "react-hook-form"
-import { formSchema } from "../../components/Form/FormSchema"
+import { formSchema } from "../../components/Form/FormLoginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { api } from "../../api/api"
 import { Link } from "react-router-dom"
@@ -11,45 +11,17 @@ import { UserContext } from "../../provider/userContext"
 import { useContext } from "react"
 
 export const Login = () => {
-
-    const [loading, setLoading] = useState(false)
     
     const {register, handleSubmit, reset, formState: { errors }} = useForm({
         resolver: zodResolver(formSchema)
     })
 
-    const { setAccountInfo, navigate} = useContext(UserContext)
+    const { loginAccount, loading } = useContext(UserContext)
 
     const handleForm = async  (accountData) => {
         
         await loginAccount(accountData)
         reset()
-    }
-
-    const loginAccount = async (accountData) => {
-        try {
-            
-            setLoading(true)
-            const {data} = await api.post("/sessions", accountData)
-            
-            localStorage.setItem("@TOKEN", data.token)
-            localStorage.setItem("@USERID", data.user.id)
-            
-            setAccountInfo(data)
-            
-            toast.success('Login Realizado com Sucesso')
-
-            setTimeout(() => {
-
-                navigate("/dashboard")
-                setLoading(false)
-            }, "2000")
-
-            
-        } catch (error) {
-            toast.error("Login ou Senha incorreto!!")
-            setLoading(false)
-        }
     }
 
 

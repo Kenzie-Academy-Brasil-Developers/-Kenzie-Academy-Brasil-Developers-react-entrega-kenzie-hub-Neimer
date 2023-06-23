@@ -1,23 +1,24 @@
-import { useState } from 'react'
 import { GlobalStyle } from './styles/globalStyle'
 import { ResetStyle } from './styles/reset'
 import { RoutesMain } from './routes/RoutesMain'
-import { UserProvider } from './provider/userContext'
+
 
 //Toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from 'react';
+import { UserContext } from './provider/userContext';
 
 
 const App = () => {
+
+  const { loading } = useContext(UserContext)
 
   return (
     <>
       <ResetStyle/>
       <GlobalStyle/>
-      <UserProvider>
-        <RoutesMain />
-      </UserProvider>
+        {loading ? <p> Carregando... </p> : <RoutesMain />}
       <ToastContainer
         position="top-right"
         autoClose={1000}
