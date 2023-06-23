@@ -4,9 +4,9 @@ export const formSchema = z.object({
 
     email: z.string()
         .nonempty("Campo obrigatorio")
-        .email("Forneça um e-mail válido."),
+        .email("Email ou senha invalido"),
     
     password: z.string()
-        .nonempty("Senha inválida")
+        .nonempty("Email ou senha invalido")
 
 })
