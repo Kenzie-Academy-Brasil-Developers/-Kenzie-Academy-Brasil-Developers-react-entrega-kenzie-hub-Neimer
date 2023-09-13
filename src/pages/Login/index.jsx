@@ -46,5 +46,3 @@ export const Login = () => {
         </LoginStyled>
     )
 }
-
-// Perguntar sobre validacao do zod no login

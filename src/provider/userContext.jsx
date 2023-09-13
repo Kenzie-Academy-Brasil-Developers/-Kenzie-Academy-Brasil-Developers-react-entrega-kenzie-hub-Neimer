@@ -4,12 +4,13 @@ import { api } from "../api/api"
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { set } from "react-hook-form";
 
 export const UserContext = createContext({})
 
 export const UserProvider = ({children}) => {
 
-    const [accountInfo, setAccountInfo] = useState({})
+    const [accountInfo, setAccountInfo] = useState(null)
     
     const [loading, setLoading] = useState(false)
 
@@ -23,6 +24,11 @@ export const UserProvider = ({children}) => {
         const token = localStorage.getItem("@TOKEN")
         const userLogged = async (token) => {  
 
+            if(!token){
+                setIsLoading(false)
+
+                return;
+            }         
             try {
                 setIsLoading(true)
                 
@@ -31,22 +37,20 @@ export const UserProvider = ({children}) => {
                         Authorization: `Bearer ${token}`
                     }
                 })
-
                 setAccountInfo(data)
                 navigate("/dashboard")        
                 
             }   catch (error) {
-                
                 toast.error("Algo deu errado, tente novamente")
-            } finally {
-                
+            } finally{
+
                 setLoading(false)
                 setIsLoading(false)
-            }
+            }      
         }
-        if(token){
-            userLogged(token)
-        } 
+      
+        userLogged(token)
+         
     }, [])
 
     const registerAccount = async (accountData) => {

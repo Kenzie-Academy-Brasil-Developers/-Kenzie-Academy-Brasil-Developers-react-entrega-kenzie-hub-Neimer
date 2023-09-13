@@ -15,7 +15,9 @@ export const Dashboard = () => {
 
     return (
         <>
-        <StyledHeader>
+        {accountInfo && 
+        <>
+         <StyledHeader>
             <div>
                 <h1>Kenzie HUB</h1>
                 <button onClick={logoutButton}>Sair</button>
@@ -37,10 +39,7 @@ export const Dashboard = () => {
                 {isOpenUpdateModal ? <ModalUpdate /> : null} 
             </div>
         </StyledMain>
+        </>}
         </>
     )
 }
-
-// <button onClick={() => {setIsOpen(true)}}>Open</button>
-// {isOpen ? <ModalAdd setIsOpen={setIsOpen} /> : null}
-// {isOpen ? <ModalUpdate setIsOpen={setIsOpen} /> : null}
